@@ -1,0 +1,40 @@
+.homepage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage__main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xxl) var(--space-lg);
+    background-color: var(--white);
+}
+
+.homepage__content {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.homepage__books {
+    display: flex;
+    gap: var(--space-xl);
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .homepage__books {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-lg);
+    }
+
+    .homepage__main {
+        padding: var(--space-lg);
+    }
+}
