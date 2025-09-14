@@ -35,6 +35,26 @@ function Header() {
                 </svg>
                 <span className={styles.header__title}>Book Catalog</span>
             </div>
+
+            <nav className={styles.header__nav}>
+                <a
+                    href='#books'
+                    className={styles.header__link}>
+                    Books
+                </a>
+
+                <a
+                    href='#about'
+                    className={styles.header__link}>
+                    About
+                </a>
+
+                <a
+                    href='#contact'
+                    className={styles.header__link}>
+                    Contact
+                </a>
+            </nav>
         </header>
     );
 }

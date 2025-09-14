@@ -2,7 +2,7 @@
     width: 100%;
     height: var(--header-height);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--primary);
     border-bottom: 1px solid var(--grey-100);
@@ -11,7 +11,7 @@
 
 .header__logo {
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: var(--space-sm);
     text-decoration: none;
     color: var(--white);

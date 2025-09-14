@@ -23,9 +23,12 @@ function Homepage() {
 
     // Load books
     useEffect(() => {
-        getBook("https://api.itbook.store/1.0/books/9780596155933");
-        getBook("https://api.itbook.store/1.0/books/9780596806026");
-    }, []);
+        // Only load books if the array is empty to prevent duplicates
+        if (books.length === 0) {
+            getBook("https://api.itbook.store/1.0/books/9780596155933");
+            getBook("https://api.itbook.store/1.0/books/9780596806026");
+        }
+    }, [books.length]);
 
     // Add Book
     function handleAddBook() {

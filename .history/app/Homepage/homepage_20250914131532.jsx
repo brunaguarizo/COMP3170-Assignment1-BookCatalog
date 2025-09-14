@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import styles from "./homepage.module.css";
 import Header from "../_ui/Header/header.jsx";
 import Book from "../_ui/Book/book.jsx";
@@ -7,29 +7,24 @@ import Footer from "../_ui/Footer/footer.jsx";
 
 function Homepage() {
     const [books, setBooks] = useState([]);
-    const hasLoaded = useRef(false);
 
     async function getBook(url) {
         try {
             const response = await fetch(url);
-            if (!response.ok) throw new Error();
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const bookData = await response.json();
+            console.log(JSON.stringify(bookData));
 
-            setBooks((prevBooks) => [...prevBooks, bookData]);
+            // Aqui é como se fosse o container.innerHTML,
+            // só que em React usamos setState:
+            setBooks((prev) => [...prev, bookData]);
         } catch (error) {
             console.log("the error is " + error);
         }
     }
 
-    // Load books
-    useEffect(() => {
-        getBook("https://api.itbook.store/1.0/books/9780596155933");
-        getBook("https://api.itbook.store/1.0/books/9780596806026");
-    }, []);
-
-    // Add Book
     function handleAddBook() {
-        alert("Add Book clicked!");
+        getBook("https://api.itbook.store/1.0/books/9781617294136");
     }
 
     return (

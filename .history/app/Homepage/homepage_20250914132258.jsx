@@ -22,10 +22,12 @@ function Homepage() {
     }
 
     // Load books
-    useEffect(() => {
-        getBook("https://api.itbook.store/1.0/books/9780596155933");
-        getBook("https://api.itbook.store/1.0/books/9780596806026");
-    }, []);
+    useEffect() => {
+        
+            getBook("https://api.itbook.store/1.0/books/9780596155933");
+            getBook("https://api.itbook.store/1.0/books/9780596806026");
+        }
+    }, [];
 
     // Add Book
     function handleAddBook() {

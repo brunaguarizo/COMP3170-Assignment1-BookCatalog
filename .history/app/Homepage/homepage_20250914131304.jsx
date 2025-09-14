@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "./homepage.module.css";
 import Header from "../_ui/Header/header.jsx";
 import Book from "../_ui/Book/book.jsx";
@@ -7,15 +7,14 @@ import Footer from "../_ui/Footer/footer.jsx";
 
 function Homepage() {
     const [books, setBooks] = useState([]);
-    const hasLoaded = useRef(false);
 
     async function getBook(url) {
         try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error();
-            const bookData = await response.json();
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const bookData = await res.json();
 
-            setBooks((prevBooks) => [...prevBooks, bookData]);
+            setBooks((prev) => [...prev, bookData]);
         } catch (error) {
             console.log("the error is " + error);
         }
@@ -23,11 +22,14 @@ function Homepage() {
 
     // Load books
     useEffect(() => {
-        getBook("https://api.itbook.store/1.0/books/9780596155933");
-        getBook("https://api.itbook.store/1.0/books/9780596806026");
+        const urls = [
+            "https://api.itbook.store/1.0/books/9780596155933",
+            "https://api.itbook.store/1.0/books/9780596806026",
+        ];
+        Promise.all(urls.map(getBook));
     }, []);
 
-    // Add Book
+    // Add Book"
     function handleAddBook() {
         alert("Add Book clicked!");
     }
@@ -44,7 +46,7 @@ function Homepage() {
                                 key={book.isbn13 || index}
                                 book={{
                                     title: book.title,
-                                    authors: book.authors,
+                                    authors: book.authors, // (essa API retorna string; garanta que o <Book/> aceite)
                                     image: book.image,
                                     detailsUrl: book.url,
                                 }}

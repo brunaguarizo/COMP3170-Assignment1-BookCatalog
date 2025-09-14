@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import styles from "./homepage.module.css";
 import Header from "../_ui/Header/header.jsx";
 import Book from "../_ui/Book/book.jsx";
@@ -7,7 +7,6 @@ import Footer from "../_ui/Footer/footer.jsx";
 
 function Homepage() {
     const [books, setBooks] = useState([]);
-    const hasLoaded = useRef(false);
 
     async function getBook(url) {
         try {
@@ -23,8 +22,11 @@ function Homepage() {
 
     // Load books
     useEffect(() => {
-        getBook("https://api.itbook.store/1.0/books/9780596155933");
-        getBook("https://api.itbook.store/1.0/books/9780596806026");
+        const urls = [
+            "https://api.itbook.store/1.0/books/9780596155933",
+            "https://api.itbook.store/1.0/books/9780596806026",
+        ];
+        Promise.all(urls.map(getBook));
     }, []);
 
     // Add Book
